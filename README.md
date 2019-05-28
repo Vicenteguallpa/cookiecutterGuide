@@ -51,7 +51,7 @@ mysite/
 &nbsp;&nbsp;&nbsp;&nbsp;manage.py
 
 ## Prerequisites & Assumptions
-As mentioned before, this project utilizes the same directory and file names as in the tutorial. You should already have docker installed.
+As mentioned before, this project utilizes the same directory and file names as in the tutorial. You should already have Atom and docker installed.
 
 ## Guide
 Open your git bash or terminal. Now change over to the directory that contains the upper "mysite" directory. You should have the following:
@@ -106,4 +106,38 @@ $ ls
 db.sqlite3 manage.py* mysite/ polls/ templates/
 $ cp -r polls/ ../mysite_cookiecutter
 ```
-You should now have the "polls" directory inside the "mysite_cookiecutter" directory
+You should now have the "polls" directory inside the "mysite_cookiecutter" directory.  
+Now open the "mysite_cookiecutter" project folder in Atom. In Atom, open the config directory; from there open the urls.py file for editing. Add your polls urls to the ```urlpatterns``` list (which is located on line 8) so that it looks like the following:
+```
+urlpatterns = [
+    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
+    path(
+        "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
+    ),
+    # Django Admin, use {% url 'admin:index' %}
+    path(settings.ADMIN_URL, admin.site.urls),
+    # User management
+    path("users/", include("mysite_cookiecutter.users.urls", namespace="users")),
+    path("accounts/", include("allauth.urls")),
+    # Your stuff: custom urls includes go here
+    path("polls/", include("polls.urls"))
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+```
+Save the changes. Note the "Your stuff: custom urls includes go here" comment on line 18. Below that line is your custom urls for your polls app.  
+Now within the config directory, open the settings directory and open the local.py file for editing. On line 14 in the ```ALLOWED_HOSTS``` list add "192.168.99.100" to the list so that it looks like:
+```
+ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1", "192.168.99.100"]
+```
+Save the changes. Now go back to your git bash and change to the "mysite_cookiecutter" directory. To build your stack run the following command: 
+```
+$ docker-compose -f local.yml build
+```
+This will take a while to complete. Once your stack is built, run the following command to create a superuser for your admin console:
+```
+$ docker-compose -f local.yml run --rm django python manage.py createsuperuser
+```
+Now run the stack with the following command:
+```
+$ docker-compose -f local.yml up
+```
