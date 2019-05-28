@@ -1,5 +1,5 @@
 # cookiecutterGuide
-This guide begins where [Writing your first Django app, part 7](https://docs.djangoproject.com/en/2.2/intro/tutorial07/) left off. Assuming you used the same directory names that were used in the "Writing your first Django app tutorial, your project structure in Atom should look like the following: 
+This guide begins where [Writing your first Django app, part 7](https://docs.djangoproject.com/en/2.2/intro/tutorial07/) left off. Assuming you used the same directory and file names that were used in the "Writing your first Django app tutorial," your project structure in Atom should look somewhat like the following: 
 
 mysite/  
 &nbsp;&nbsp;&nbsp;&nbsp;mysite/  
@@ -51,11 +51,14 @@ mysite/
 &nbsp;&nbsp;&nbsp;&nbsp;manage.py
 
 ## Prerequisites & Assumptions
-This guide uses the same directory names used in the "Writing your first Django app" tutorial. 
-You should already have docker installed.
+As mentioned before, this project utilizes the same directory and file names as in the tutorial. You should already have docker installed.
 
 ## Guide
-Open your git bash or terminal.
+Open your git bash or terminal. Now change over to the directory that contains the upper "mysite" directory. You should have the following:
+```
+$ ls
+mysite/
+```
 Install CookieCuteter:
 ```
 $ pip install "cookiecutter>=1.4.0"
@@ -90,3 +93,17 @@ You'll be prompted for some values. Provide them as follows
 * use_travisci: no
 * keep_local_envs_in_vcs: no
 * debug: no
+
+You should now see a "[SUCCESS]: Project initialized, keep up the good work!" message and your directory should now contain "mysite_cookiecutter" directory
+```
+$ ls
+mysite/ mysite_cookiecutter/
+```
+Now copy the "polls" directory thats within the upper "mysite" directory into the "mysite_cookiecutter" directory: 
+```
+$ cd mysite/
+$ ls 
+db.sqlite3 manage.py* mysite/ polls/ templates/
+$ cp -r polls/ ../mysite_cookiecutter
+```
+You should now have the "polls" directory inside the "mysite_cookiecutter" directory
