@@ -92,27 +92,34 @@ email: [YOUR EMAIL HERE]
 version: 0.0.1
 Select open_source_license: 1  [THIS OPTION SHOULD BE 'MIT']
 timezone: America/New_York
-windows: yes [IF YOOU ARE NOT USING A WINDOWS PC THEN ENTER 'no']
-use_pycharm: no
-use_docker: yes
+windows: y [IF YOOU ARE NOT USING A WINDOWS PC THEN ENTER 'n']
+use_pycharm: n
+use_docker: y
 Select postgresql_version: 1 [THIS SHOULD BE THE LATEST VERSION OF POSTGRESQL]
 Select js_task_runner: 2 [THIS SHOULD BE 'Gulp']
 Select cloud_provider: 1 [THIS SHOULD BE 'AWS']
-custom_bootstrap_compilation: no
-use_compressor: no
-use_celery: no
-use_mailhog: no
-use_sentry: no
-use_whitenoise: yes
-use_heroku: no
-use_travisci: no
-keep_local_envs_in_vcs: no
-debug: no
+custom_bootstrap_compilation: n
+use_compressor: n
+use_celery: n
+use_mailhog: n
+use_sentry: n
+use_whitenoise: y
+use_heroku: n
+use_travisci: n
+keep_local_envs_in_vcs: n
+debug: n
 ```
 You should now see a "[SUCCESS]: Project initialized, keep up the good work!" message and your directory should now contain "mysite_cookiecutter" directory:
 ```
 $ ls
 mysite/ mysite_cookiecutter/
+$ cd mysite_cookiecutter/
+$ ls
+compose/          gulpfile.js  manage.py*                             production.yml  setup.cfg
+config/           LICENSE      merge_production_dotenvs_in_dotenv.py  pytest.ini
+CONTRIBUTORS.txt  local.yml    mysite_cookiecutter/                   README.rst
+docs/             locale/      package.json                           requirements/
+$ cd ../
 ```
 Now copy the "polls" directory thats within the upper "mysite" directory into the "mysite_cookiecutter" directory: 
 ```
@@ -125,13 +132,12 @@ You should now have the "polls" directory inside the "mysite_cookiecutter" direc
 ```
 $ cd ../mysite_cookiecutter/
 $ ls 
-config/           locale/                                polls/         requirements.txt
-CONTRIBUTORS.txt  manage.py*                             Procfile       runtime.txt
-docs/             merge_production_dotenvs_in_dotenv.py  pytest.ini     setup.cfg
-gulpfile.js       mysite_cookiecutter/                   README.rst     utility/
-LICENSE           package.json                           requirements/
+compose/          gulpfile.js  manage.py*                             polls/          requirements/
+config/           LICENSE      merge_production_dotenvs_in_dotenv.py  production.yml  setup.cfg
+CONTRIBUTORS.txt  local.yml    mysite_cookiecutter/                   pytest.ini
+docs/             locale/      package.json                           README.rst
 ```
-Now open Atom and go to "file -> open folder" and then navigate to the "mysite_cookiecutter" directory and click "select folder", this should show the entire project structure of "mysite_cookiecutter"  
+Now open Atom and go to "File -> Open Folder..." and then navigate to the "mysite_cookiecutter" directory and select it, but do not go into the directory. Click "select folder", you should now have the "mysite_cookiecutter" project showing in Atom.  
 Now, in Atom, open the "config" directory; from there open the "urls.py" file for editing.  
 Add your polls app urls, ```path("polls/", include("polls.urls"))```, to the ```urlpatterns``` list (the list starts on line 8 in the "urls.py" file) so that it looks like the following:
 ```
@@ -155,17 +161,25 @@ Now within the "config" directory, open the "settings" directory and open the "l
 ```
 ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1", "192.168.99.100"]
 ```
-Save the changes.  
+Save the changes. Now in this same "settings" directory, open the "base.py" file for editing. For to line 73 where there should be a ```LOCAL_APPS``` list and insert ```"polls"```; you should have the following:
+```
+LOCAL_APPS = [
+    "mysite_cookiecutter.users.apps.UsersConfig",
+    # Your stuff: custom apps go here
+    "polls"
+]
+```
+Save the changes  
 Go back to your git bash and change to the "mysite_cookiecutter" directory. Build your stack by running the following command: 
 ```
 $ docker-compose -f local.yml build
 ```
-This will take a while to complete. Once your stack is built, run the following command to create a superuser for your admin console:
+This will take a while to complete. If all went well, you should see something like:
 ```
-$ docker-compose -f local.yml run --rm django python manage.py createsuperuser
+...
+Successfully built e3e766a58fba
+Successfully tagged mysite_cookiecutter_local_node:latest
 ```
-You will be prompted for a username and password. Enter the values and make sure your remember them. Since your admin console will now require a username and password to sign in, you will use these superuser credentials to sign in.  
-
 Now run the stack with the following command:
 ```
 $ docker-compose -f local.yml up
@@ -182,6 +196,15 @@ node_1      |  -----------------------------------
 node_1      |           UI: http://localhost:3001
 node_1      |  UI External: http://localhost:3001
 node_1      |  -----------------------------------
+```
+Now open a separate git bash or terminal and change into your "mysite_cookiecutter" directory. Now run the following command to create a superuser for your admin console:
+```
+$ docker-compose -f local.yml run --rm django python manage.py createsuperuser
+```
+You will be prompted for a username, email address, and password. Enter the values and make sure your remember them. Since your admin console will now require a username and password to sign in, you will use these superuser credentials to sign in. If all went well you should see the following message:
+```
+...
+Superuser created successfully.
 ```
 Now open your browser and go to the following web address:  
 192.168.99.100:3000/polls/
@@ -202,3 +225,52 @@ You should see Cookiecutter's template site! If you get an 'Unable to connect' e
 http://localhost:3000/  
 http://172.23.0.4:3000/    
 http://localhost:3001/
+
+## Tips and debugging
+If you make a typo while filling out the fields for the cookiecutter template you can always abort the command by pressing Ctrl-C.  
+If when building your stack or running it or creating a superuser you repeatedly see something like the following:
+```
+Waiting for PostgreSQL to become available...
+Waiting for PostgreSQL to become available...
+Waiting for PostgreSQL to become available...
+Waiting for PostgreSQL to become available...
+Waiting for PostgreSQL to become available...
+Waiting for PostgreSQL to become available...
+Waiting for PostgreSQL to become available...
+Waiting for PostgreSQL to become available...
+Waiting for PostgreSQL to become available...
+Waiting for PostgreSQL to become available...
+Waiting for PostgreSQL to become available...
+Waiting for PostgreSQL to become available...
+Waiting for PostgreSQL to become available...
+Waiting for PostgreSQL to become available...
+Waiting for PostgreSQL to become available...
+```
+press Ctrl-C to cancel the job, then run the folowing command:
+```
+$ docker container ls
+```
+you should see something like this:
+```
+CONTAINER ID        IMAGE                                     COMMAND                  CREATED             STATUS              PORTS                              NAMES
+712f9cc26440        mysite_cookiecutter_production_postgres   "docker-entrypoint.s…"   23 hours ago        Up 6 minutes        5432/tcp                           mysitecookiecutter_postgres_1
+```
+where there is only one container runnning so far. Then run the following command:
+```
+$ docker container prune
+```
+you will be prompted with the following message: 
+```
+WARNING! This will remove all stopped containers.
+Are you sure you want to continue? [y/N]
+```
+enter 'y', then run the following command:
+```
+$ docker volume prune
+```
+you will be prompted with the following message:
+```
+WARNING! This will remove all local volumes not used by at least one container.
+Are you sure you want to continue? [y/N]
+```
+enter 'y', now continue from the line "Build your stack by running the following command:" section in the Guide 
