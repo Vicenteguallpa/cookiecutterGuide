@@ -59,7 +59,7 @@ mysite/
 &nbsp;&nbsp;&nbsp;&nbsp;manage.py
 
 ## Prerequisites and Assumptions
-As mentioned before, this project utilizes the same directory and file names as the Django tutorial. You should already have Atom and docker installed. You should have your Docker daemon running, you can do this by simply opening the Docker Quickstart Terminal and waiting for the image of a whale to show up; it looks like this:
+As mentioned before, this project utilizes the same directory and file names as the Django tutorial. You should already have Atom and Docker installed. You should have your Docker daemon running, you can do this by simply opening the Docker Quickstart Terminal and waiting for the image of a whale to show up; it looks like this:
 ```
 ##         .
                   ## ## ##        ==
