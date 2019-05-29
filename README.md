@@ -1,4 +1,12 @@
 # cookiecutterGuide
+
+## Table of Contents
+[Introduction](#Introduction)  
+[Prerequisites & Assumptions](#Prerequisites-&-Assumptions)  
+[Guide](#Guide)  
+[Tips and Debugging](#Tips-and-Debugging)  
+
+## Introduction
 This guide begins where [Writing your first Django app, part 7](https://docs.djangoproject.com/en/2.2/intro/tutorial07/) left off. Assuming you used the same directory and file names that were used in the "Writing your first Django app" tutorial, your project directory structure should look somewhat like the following: 
 
 mysite/  
@@ -227,7 +235,7 @@ http://172.23.0.4:3000/
 http://localhost:3001/  
 To shutdown your server, press Ctrl-C.
 
-## Tips and debugging
+## Tips and Debugging
 If you make a typo while filling out the fields for the cookiecutter template you can always abort the command by pressing Ctrl-C.  
 If when building your stack or running it or creating a superuser you repeatedly see something like the following:
 ```
