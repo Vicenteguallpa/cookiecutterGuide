@@ -51,7 +51,10 @@ mysite/
 &nbsp;&nbsp;&nbsp;&nbsp;manage.py
 
 ## Prerequisites & Assumptions
-As mentioned before, this project utilizes the same directory and file names as in the tutorial. You should already have Atom and docker installed.
+As mentioned before, this project utilizes the same directory and file names as in the tutorial. You should already have Atom and docker installed. You should have your Docker daemon running, you can do this by simply opening the Docker Quickstart Terminal and waiting for the image of a whale to show up, it looks like this:
+```
+
+```
 
 ## Guide
 Open your git bash or terminal. Now change over to the directory that contains the upper "mysite" directory. You should have the following:
@@ -59,41 +62,46 @@ Open your git bash or terminal. Now change over to the directory that contains t
 $ ls
 mysite/
 ```
-Install CookieCuteter:
+Install CookieCutter:
 ```
 $ pip install "cookiecutter>=1.4.0"
 ```
-Now run it against the following repo:
+Now run CookieCutter against the following repo:
 ```
 $ cookiecutter https://github.com/pydanny/cookiecutter-django
 ```
-You'll be prompted for some values. Provide them as follows 
-* project_name: mysite_cookiecutter
-* project_slug: mysite_cookiecutter
-* description: inserting my first Django app into the cookiecutter template
-* author_name: [YOUR NAME HERE]
-* domain_name: mysite.com
-* email: [YOUR EMAIL HERE]
-* version: 0.0.1
-* Select open_source_license: 1
-* timezone: America/New_York
-* windows: yes 
-* use_pycharm: no
-* use_docker: yes
-* Select postgresql_version: 1
-* Select js_task_runner: 2
-* Select cloud_provider: 1
-* custom_bootstrap_compilation: no
-* use_compressor: no
-* use_celery: no
-* use_mailhog: no
-* use_sentry: no
-* use_whitenoise: yes
-* use_heroku: no
-* use_travisci: no
-* keep_local_envs_in_vcs: no
-* debug: no
-
+If you get the following prompt:
+```
+You've downloaded C:\Users\~\.cookiecutters\cookiecutter-django before. Is it okay to delete and re-download it? [yes]:
+```
+Enter 'yes'. After that you'll be prompted for some values. Provide them as follows 
+```
+project_name: mysite_cookiecutter
+project_slug: mysite_cookiecutter
+description: inserting my first Django app into the cookiecutter template
+author_name: [YOUR NAME HERE]
+domain_name: mysite.com
+email: [YOUR EMAIL HERE]
+version: 0.0.1
+Select open_source_license: 1  [THIS OPTION SHOULD BE 'MIT']
+timezone: America/New_York
+windows: yes [IF YOOU ARE NOT USING A WINDOWS PC THEN ENTER 'no']
+use_pycharm: no
+use_docker: yes
+Select postgresql_version: 1 [THIS SHOULD BE THE LATEST VERSION]
+Select js_task_runner: 2 [THIS SHOULD BE 'Gulp']
+Select cloud_provider: 1 [THIS SHOULD BE 'AWS']
+custom_bootstrap_compilation: no
+use_compressor: no
+use_celery: no
+use_mailhog: no
+use_sentry: no
+use_whitenoise: yes
+use_heroku: no
+use_travisci: no
+keep_local_envs_in_vcs: no
+debug: no
+```
 You should now see a "[SUCCESS]: Project initialized, keep up the good work!" message and your directory should now contain "mysite_cookiecutter" directory
 ```
 $ ls
@@ -107,7 +115,8 @@ db.sqlite3 manage.py* mysite/ polls/ templates/
 $ cp -r polls/ ../mysite_cookiecutter
 ```
 You should now have the "polls" directory inside the "mysite_cookiecutter" directory.  
-Now open the "mysite_cookiecutter" project folder in Atom. In Atom, open the config directory; from there open the urls.py file for editing. Add your polls urls to the ```urlpatterns``` list (which is located on line 8) so that it looks like the following:
+Now open the "mysite_cookiecutter" project folder in Atom. In Atom, open the "config" directory; from there open the "urls.py" file for editing.  
+Add your polls app urls, ```path("polls/", include("polls.urls"))```, to the ```urlpatterns``` list (the list starts on line 8 in the "urls.py" file) so that it looks like the following:
 ```
 urlpatterns = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
@@ -125,7 +134,7 @@ urlpatterns = [
 
 ```
 Save the changes. Note the "Your stuff: custom urls includes go here" comment on line 18. Below that line is your custom urls for your polls app.  
-Now within the config directory, open the settings directory and open the local.py file for editing. On line 14 in the ```ALLOWED_HOSTS``` list add "192.168.99.100" to the list so that it looks like:
+Now within the config directory, open the settings directory and open the local.py file for editing. On line 14 in the ```ALLOWED_HOSTS``` list add ```"192.168.99.100"``` to the list so that it looks like:
 ```
 ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1", "192.168.99.100"]
 ```
@@ -137,7 +146,13 @@ This will take a while to complete. Once your stack is built, run the following 
 ```
 $ docker-compose -f local.yml run --rm django python manage.py createsuperuser
 ```
+You will be prompted for a username and password. Enter the values and make sure your remember them. Since your admin console will now require a username and password to sign in, you will use these superuser credentials to sign in.  
+
 Now run the stack with the following command:
 ```
 $ docker-compose -f local.yml up
 ```
+This can take a while to complete, but if all is well you should see the following output:
+```
+```
+Now open your browser and go to this web address: 
