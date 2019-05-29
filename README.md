@@ -119,9 +119,18 @@ Now copy the "polls" directory thats within the upper "mysite" directory into th
 $ cd mysite/
 $ ls 
 db.sqlite3 manage.py* mysite/ polls/ templates/
-$ cp -r polls/ ../mysite_cookiecutter
+$ cp -r polls/ ../mysite_cookiecutter/
 ```
-You should now have the "polls" directory inside the "mysite_cookiecutter" directory.  
+You should now have the "polls" directory inside the "mysite_cookiecutter" directory:
+```
+$ cd ../mysite_cookiecutter/
+$ ls 
+config/           locale/                                polls/         requirements.txt
+CONTRIBUTORS.txt  manage.py*                             Procfile       runtime.txt
+docs/             merge_production_dotenvs_in_dotenv.py  pytest.ini     setup.cfg
+gulpfile.js       mysite_cookiecutter/                   README.rst     utility/
+LICENSE           package.json                           requirements/
+```
 Now open Atom and go to "file -> open folder" and then navigate to the "mysite_cookiecutter" directory and click "select folder", this should show the entire project structure of "mysite_cookiecutter"  
 Now, in Atom, open the "config" directory; from there open the "urls.py" file for editing.  
 Add your polls app urls, ```path("polls/", include("polls.urls"))```, to the ```urlpatterns``` list (the list starts on line 8 in the "urls.py" file) so that it looks like the following:
