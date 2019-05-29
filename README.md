@@ -173,4 +173,21 @@ node_1      |  UI External: http://localhost:3001
 node_1      |  -----------------------------------
 ```
 Now open your browser and go to the following web address:  
-[192.168.99.100:3000/polls](192.168.99.100:3000/polls)
+192.168.99.100:3000/polls/
+You should now see your polls homepage with the background.gif. If you get an 'Unable to connect' error then try some of the links below:  
+http://localhost:3000/polls/  
+http://172.23.0.4:3000/polls/    
+http://localhost:3001/polls/  
+Once you have your polls homepage showing up, notice how there are no questions listed. This is because the cookiecutter django template is using a separate database from the one you used in your Django tutorial. Let's add a question; visit your admin console at the following address  
+192.168.99.100:3000/admin/   
+If you get an 'Unable to connect' error then try some of the links below:  
+http://localhost:3000/admin/  
+http://172.23.0.4:3000/admin/    
+http://localhost:3001/admin/  
+You will be prompted for your username and password; enter the same credentials that you used to create your superuser. You should now see you admin console with additional fields. You should see your "POLLS" field; like in the Django admin tutorial, create a new question and remember to hit "save". Now navigate back to your polls homepage. You should now see your question come up!  
+Additionally, if you visit 
+192.168.99.100:3000/  
+You should see Cookiecutter's template site! If you get an 'Unable to connect' error then try some of the links below:  
+http://localhost:3000/  
+http://172.23.0.4:3000/    
+http://localhost:3001/
