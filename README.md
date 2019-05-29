@@ -1,5 +1,5 @@
 # cookiecutterGuide
-This guide begins where [Writing your first Django app, part 7](https://docs.djangoproject.com/en/2.2/intro/tutorial07/) left off. Assuming you used the same directory and file names that were used in the "Writing your first Django app tutorial," your project structure in Atom should look somewhat like the following: 
+This guide begins where [Writing your first Django app, part 7](https://docs.djangoproject.com/en/2.2/intro/tutorial07/) left off. Assuming you used the same directory and file names that were used in the "Writing your first Django app" tutorial, your project directory structure should look somewhat like the following: 
 
 mysite/  
 &nbsp;&nbsp;&nbsp;&nbsp;mysite/  
@@ -51,7 +51,7 @@ mysite/
 &nbsp;&nbsp;&nbsp;&nbsp;manage.py
 
 ## Prerequisites & Assumptions
-As mentioned before, this project utilizes the same directory and file names as in the tutorial. You should already have Atom and docker installed. You should have your Docker daemon running, you can do this by simply opening the Docker Quickstart Terminal and waiting for the image of a whale to show up, it looks like this:
+As mentioned before, this project utilizes the same directory and file names as the Django tutorial. You should already have Atom and docker installed. You should have your Docker daemon running, you can do this by simply opening the Docker Quickstart Terminal and waiting for the image of a whale to show up; it looks like this:
 ```
 ##         .
                   ## ## ##        ==
@@ -69,11 +69,11 @@ Open your git bash or terminal. Now change over to the directory that contains t
 $ ls
 mysite/
 ```
-Install CookieCutter:
+Install Cookiecutter with the following command:
 ```
 $ pip install "cookiecutter>=1.4.0"
 ```
-Now run CookieCutter against the following repo:
+Now run Cookiecutter against the following repo:
 ```
 $ cookiecutter https://github.com/pydanny/cookiecutter-django
 ```
@@ -95,7 +95,7 @@ timezone: America/New_York
 windows: yes [IF YOOU ARE NOT USING A WINDOWS PC THEN ENTER 'no']
 use_pycharm: no
 use_docker: yes
-Select postgresql_version: 1 [THIS SHOULD BE THE LATEST VERSION]
+Select postgresql_version: 1 [THIS SHOULD BE THE LATEST VERSION OF POSTGRESQL]
 Select js_task_runner: 2 [THIS SHOULD BE 'Gulp']
 Select cloud_provider: 1 [THIS SHOULD BE 'AWS']
 custom_bootstrap_compilation: no
@@ -109,7 +109,7 @@ use_travisci: no
 keep_local_envs_in_vcs: no
 debug: no
 ```
-You should now see a "[SUCCESS]: Project initialized, keep up the good work!" message and your directory should now contain "mysite_cookiecutter" directory
+You should now see a "[SUCCESS]: Project initialized, keep up the good work!" message and your directory should now contain "mysite_cookiecutter" directory:
 ```
 $ ls
 mysite/ mysite_cookiecutter/
@@ -122,7 +122,8 @@ db.sqlite3 manage.py* mysite/ polls/ templates/
 $ cp -r polls/ ../mysite_cookiecutter
 ```
 You should now have the "polls" directory inside the "mysite_cookiecutter" directory.  
-Now open the "mysite_cookiecutter" project folder in Atom. In Atom, open the "config" directory; from there open the "urls.py" file for editing.  
+Now open Atom and go to "file -> open folder" and then navigate to the "mysite_cookiecutter" directory and click "select folder", this should show the entire project structure of "mysite_cookiecutter"  
+Now, in Atom, open the "config" directory; from there open the "urls.py" file for editing.  
 Add your polls app urls, ```path("polls/", include("polls.urls"))```, to the ```urlpatterns``` list (the list starts on line 8 in the "urls.py" file) so that it looks like the following:
 ```
 urlpatterns = [
@@ -141,11 +142,12 @@ urlpatterns = [
 
 ```
 Save the changes. Note the "Your stuff: custom urls includes go here" comment on line 18. Below that line is your custom urls for your polls app.  
-Now within the config directory, open the settings directory and open the local.py file for editing. On line 14 in the ```ALLOWED_HOSTS``` list add ```"192.168.99.100"``` to the list so that it looks like:
+Now within the "config" directory, open the "settings" directory and open the "local.py" file for editing. On line 14 in the ```ALLOWED_HOSTS``` list add ```"192.168.99.100"``` to the list so that it looks like:
 ```
 ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1", "192.168.99.100"]
 ```
-Save the changes. Now go back to your git bash and change to the "mysite_cookiecutter" directory. To build your stack run the following command: 
+Save the changes.  
+Go back to your git bash and change to the "mysite_cookiecutter" directory. Build your stack by running the following command: 
 ```
 $ docker-compose -f local.yml build
 ```
