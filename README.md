@@ -224,7 +224,8 @@ Additionally, if you visit
 You should see Cookiecutter's template site! If you get an 'Unable to connect' error then try some of the links below:  
 http://localhost:3000/  
 http://172.23.0.4:3000/    
-http://localhost:3001/
+http://localhost:3001/  
+To shutdown your server, press Ctrl-C.
 
 ## Tips and debugging
 If you make a typo while filling out the fields for the cookiecutter template you can always abort the command by pressing Ctrl-C.  
