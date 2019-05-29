@@ -53,7 +53,14 @@ mysite/
 ## Prerequisites & Assumptions
 As mentioned before, this project utilizes the same directory and file names as in the tutorial. You should already have Atom and docker installed. You should have your Docker daemon running, you can do this by simply opening the Docker Quickstart Terminal and waiting for the image of a whale to show up, it looks like this:
 ```
-
+##         .
+                  ## ## ##        ==
+               ## ## ## ## ##    ===
+           /"""""""""""""""""\___/ ===
+      ~~~ {~~ ~~~~ ~~~ ~~~~ ~~~ ~ /  ===- ~~~
+           \______ o           __/
+             \    \         __/
+              \____\_______/
 ```
 
 ## Guide
@@ -154,5 +161,16 @@ $ docker-compose -f local.yml up
 ```
 This can take a while to complete, but if all is well you should see the following output:
 ```
+...
+[Browsersync] Proxying: http://django:8000
+node_1      | [Browsersync] Access URLs:
+node_1      |  -----------------------------------
+node_1      |        Local: http://localhost:3000
+node_1      |     External: http://172.23.0.4:3000
+node_1      |  -----------------------------------
+node_1      |           UI: http://localhost:3001
+node_1      |  UI External: http://localhost:3001
+node_1      |  -----------------------------------
 ```
-Now open your browser and go to this web address: 
+Now open your browser and go to the following web address:  
+[192.168.99.100:3000/polls](192.168.99.100:3000/polls)
