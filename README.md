@@ -117,7 +117,11 @@ use_travisci: n
 keep_local_envs_in_vcs: n
 debug: n
 ```
-You should now see a "[SUCCESS]: Project initialized, keep up the good work!" message and your directory should now contain "mysite_cookiecutter" directory:
+If all went well you should see:
+```
+[SUCCESS]: Project initialized, keep up the good work!
+```
+Your directory should now contain "mysite_cookiecutter" directory:
 ```
 $ ls
 mysite/ mysite_cookiecutter/
@@ -169,7 +173,7 @@ Now within the "config" directory, open the "settings" directory and open the "l
 ```
 ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1", "192.168.99.100"]
 ```
-Save the changes. Now in this same "settings" directory, open the "base.py" file for editing. For to line 73 where there should be a ```LOCAL_APPS``` list and insert ```"polls"```; you should have the following:
+Save the changes. Now in this same "settings" directory, open the "base.py" file for editing. On line 73, there should be a ```LOCAL_APPS``` list where you will insert ```"polls"```. You should have the following:
 ```
 LOCAL_APPS = [
     "mysite_cookiecutter.users.apps.UsersConfig",
@@ -192,7 +196,7 @@ Now run the stack with the following command:
 ```
 $ docker-compose -f local.yml up
 ```
-This can take a while to complete, but if all is well you should see the following output:
+This can take a while to complete, but if all went well you should see the following output:
 ```
 ...
 [Browsersync] Proxying: http://django:8000
@@ -204,6 +208,7 @@ node_1      |  -----------------------------------
 node_1      |           UI: http://localhost:3001
 node_1      |  UI External: http://localhost:3001
 node_1      |  -----------------------------------
+...
 ```
 Now open a separate git bash or terminal and change into your "mysite_cookiecutter" directory. Now run the following command to create a superuser for your admin console:
 ```
@@ -215,28 +220,29 @@ You will be prompted for a username, email address, and password. Enter the valu
 Superuser created successfully.
 ```
 Now open your browser and go to the following web address:  
-192.168.99.100:3000/polls/
-You should now see your polls homepage with the background.gif. If you get an 'Unable to connect' error then try some of the links below:  
-http://localhost:3000/polls/  
-http://172.23.0.4:3000/polls/    
-http://localhost:3001/polls/  
+192.168.99.100:3000/polls/  
+You should now see your polls homepage with the background.gif.  
 Once you have your polls homepage showing up, notice how there are no questions listed. This is because the cookiecutter django template is using a separate database from the one you used in your Django tutorial. Let's add a question; visit your admin console at the following address  
-192.168.99.100:3000/admin/   
-If you get an 'Unable to connect' error then try some of the links below:  
-http://localhost:3000/admin/  
-http://172.23.0.4:3000/admin/    
-http://localhost:3001/admin/  
+192.168.99.100:3000/admin/  
 You will be prompted for your username and password; enter the same credentials that you used to create your superuser. You should now see you admin console with additional fields. You should see your "POLLS" field; like in the Django admin tutorial, create a new question and remember to hit "save". Now navigate back to your polls homepage. You should now see your question come up!  
-Additionally, if you visit 
+Additionally, if you visit  
 192.168.99.100:3000/  
-You should see Cookiecutter's template site! If you get an 'Unable to connect' error then try some of the links below:  
-http://localhost:3000/  
-http://172.23.0.4:3000/    
-http://localhost:3001/  
 To shutdown your server, press Ctrl-C.
 
 ## Tips and Debugging
-If you make a typo while filling out the fields for the cookiecutter template you can always abort the command by pressing Ctrl-C.  
+If you make a typo while filling out the fields for the cookiecutter template you can always abort the command by pressing Ctrl-C.   
+If you get an 'Unable to connect' error when trying to connect to the polls homepage then try some of the links below:  
+http://localhost:3000/polls/  
+http://172.23.0.4:3000/polls/    
+http://localhost:3001/polls/  
+If you get an 'Unable to connect' error when trying to connect to the admin console then try some of the links below:  
+http://localhost:3000/admin/  
+http://172.23.0.4:3000/admin/    
+http://localhost:3001/admin/  
+If you get an 'Unable to connect' error when trying to connect to the Cookiecutter template homepage then try some of the links below:  
+http://localhost:3000/  
+http://172.23.0.4:3000/    
+http://localhost:3001/  
 If when building your stack or running it or creating a superuser you repeatedly see something like the following:
 ```
 Waiting for PostgreSQL to become available...
